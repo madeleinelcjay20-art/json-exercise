@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #E2CFEA;
+            font-family: 'Fredoka', sans-serif;
+            text-align: center;
+            padding: 80px 20px;
+            color: #4A306D;
+        }
+
+        h1 {
+            color: #A06CD5;
+            font-size: 45px;
+            font-weight: 700;
+        }
+
+        button {
+            background-color: #A06CD5;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #4A306D;
+            transform: scale(1.08) rotate(-2deg);
+        }
+
+        #compliments {
+            background-color: white;
+            color: #A06CD5;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            min-height: 50px;
+            box-shadow: 5px 5px 0px #A06CD5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Compliments for Kieran</h1>
+    <button id="get-compliments">✨ Click to Compliment Kieran ✨</button>
+    <div id="compliments"></div>
+
+
+    <script>
+        let getCompliments = document.getElementById("get-compliments");
+        let ComplimentsDiv = document.getElementById("compliments");
+        let complimentsList;
+
+        async function loadCompliments() {
+            const response = await fetch('compliments.json');
+            console.log(response);
+
+            const data = await response.json();
+            console.log(data);
+
+            const compliments = data.compliments;
+            console.log(compliments);
+
+            complimentsList = data.compliments;
+            console.log(complimentsList);
+        }
+
+        loadCompliments();
+
+        getCompliments.addEventListener("click", function() {
+
+            const randomIndex = Math.floor(Math.random() * complimentsList.length);
+
+            const randomCompliment = complimentsList[randomIndex];
+
+            ComplimentsDiv.textContent = randomCompliment;
+
+        });
+
+    </script>
+
+</body>
+</html>
